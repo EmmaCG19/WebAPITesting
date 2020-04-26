@@ -105,21 +105,24 @@ namespace SchoolAPI.Controllers
             if (!ModelState.IsValid)
                 return BadRequest();
 
+
             using (var context = new SchoolDBEntities())
             {
-                context.Students.Add(new Student()
+                var insertedStudent = new Student()
                 {
                     StudentID = student.Id,
                     StudentName = student.FullName,
                     StandardId = 3
-                });
+                };
 
+                context.Students.Add(insertedStudent);
                 context.SaveChanges();
+
+                student.Id = insertedStudent.StudentID;
             }
 
-
             //Devolver el estudiante con el id generado
-            return Ok();
+            return Ok(student);
 
         }
 
