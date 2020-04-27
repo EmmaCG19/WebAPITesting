@@ -210,9 +210,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\StandardVM.cs" />
-    <Compile Include="Models\StudentAdressVM.cs" />
-    <Compile Include="Models\StudentVM.cs" />
+    <Compile Include="Models\StandardDTO.cs" />
+    <Compile Include="Models\StudentAdressDTO.cs" />
+    <Compile Include="Models\StudentDTO.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -1,0 +1,31 @@
+﻿@model MVCSchool.Models.StudentVM
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+</head>
+<body>
+    <div>
+        <table>
+            <tr>
+                <th>ID</th>
+                <th>Nombre</th>
+            </tr>
+            @foreach (var est in Model.Students)
+            {
+                <tr>
+                    <td>@est.Id</td>
+                    <td>@est.FullName</td>
+                </tr>
+            }
+        </table>
+    </div>
+</body>
+</html>

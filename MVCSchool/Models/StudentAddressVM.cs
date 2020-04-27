@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace SchoolAPI.Models
+namespace MVCSchool.Models
 {
-    public class StudentAdressVM
+    public class StudentAddressVM
     {
         public int StudentId { get; set; }
         public string Address1 { get; set; }
@@ -13,5 +13,6 @@ namespace SchoolAPI.Models
         public string City { get; set; }
         public string State { get; set; }
 
+       
     }
 }

@@ -6,9 +6,9 @@ using SchoolAPI.DAL;
 
 namespace SchoolAPI.Models
 {
-    public class StudentVM
+    public class StudentDTO
     {
-        public StudentVM()
+        public StudentDTO()
         {
 
         }
@@ -17,8 +17,8 @@ namespace SchoolAPI.Models
         public string FullName { get; set; }
 
         //Navigation properties
-        public StandardVM Standard { get; set; }
-        public StudentAdressVM Address { get; set; }
+        public StandardDTO Standard { get; set; }
+        public StudentAdressDTO Address { get; set; }
                 
 
     }

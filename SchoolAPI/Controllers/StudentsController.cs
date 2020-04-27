@@ -14,17 +14,17 @@ namespace SchoolAPI.Controllers
 
         public IHttpActionResult GetAllStudents(bool includeAddress = false)
         {
-            List<StudentVM> students = null;
+            List<StudentDTO> students = null;
 
             using (var context = new SchoolDBEntities())
             {
                 students = context.Students
                                         .Include("StudentAddress")
-                                        .Select(s => new StudentVM()
+                                        .Select(s => new StudentDTO()
                                         {
                                             Id = s.StudentID,
                                             FullName = s.StudentName,
-                                            Address = s.StudentAddress == null || includeAddress == false ? null : new StudentAdressVM()
+                                            Address = s.StudentAddress == null || includeAddress == false ? null : new StudentAdressDTO()
                                             {
                                                 StudentId = s.StudentID,
                                                 Address1 = s.StudentAddress.Address1,
@@ -33,7 +33,7 @@ namespace SchoolAPI.Controllers
                                                 City = s.StudentAddress.City
                                             }
                                         })
-                                        .ToList<StudentVM>();
+                                        .ToList<StudentDTO>();
 
             }
 
@@ -47,19 +47,19 @@ namespace SchoolAPI.Controllers
         [Route("api/students/{name:alpha}")]
         public IHttpActionResult GetStudentsByName(string name, bool addressIncluded = false)
         {
-            IList<StudentVM> studentsByName = null;
+            IList<StudentDTO> studentsByName = null;
 
             using (var context = new SchoolDBEntities())
             {
                 studentsByName = context.Students
                     .Include("StudentAddress")
                     .Where(s => s.StudentName.ToLower().Equals(name.ToLower()))
-                    .Select(s => new StudentVM()
+                    .Select(s => new StudentDTO()
                     {
                         Id = s.StudentID,
                         FullName = s.StudentName,
                         Address = s.StudentAddress == null || addressIncluded == false ? null :
-                        new StudentAdressVM()
+                        new StudentAdressDTO()
                         {
                             StudentId = s.StudentID,
                             City = s.StudentAddress.City,
@@ -69,7 +69,7 @@ namespace SchoolAPI.Controllers
 
                         }
                     })
-                    .ToList<StudentVM>();
+                    .ToList<StudentDTO>();
             }
 
             if (studentsByName.Count == 0)
@@ -80,18 +80,18 @@ namespace SchoolAPI.Controllers
 
         public IHttpActionResult GetStudentById(int id)
         {
-            StudentVM student = null;
+            StudentDTO student = null;
 
             using (var context = new SchoolDBEntities())
             {
                 student = context.Students
                                    .Where(s => s.StudentID == id)
-                                   .Select(s => new StudentVM()
+                                   .Select(s => new StudentDTO()
                                    {
                                        Id = s.StudentID,
                                        FullName = s.StudentName
 
-                                   }).FirstOrDefault<StudentVM>();
+                                   }).FirstOrDefault<StudentDTO>();
             }
 
             if (student is null)
@@ -100,7 +100,7 @@ namespace SchoolAPI.Controllers
             return Ok(student);
         }
 
-        public IHttpActionResult PostStudent(StudentVM student)
+        public IHttpActionResult PostStudent(StudentDTO student)
         {
             if (!ModelState.IsValid)
                 return BadRequest();
@@ -126,7 +126,7 @@ namespace SchoolAPI.Controllers
 
         }
 
-        public IHttpActionResult PutStudent(StudentVM student)
+        public IHttpActionResult PutStudent(StudentDTO student)
         {
             if (!ModelState.IsValid)
                 return BadRequest("Los datos ingresados son inválidos.");
