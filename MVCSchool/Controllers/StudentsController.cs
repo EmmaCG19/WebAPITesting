@@ -10,8 +10,8 @@ namespace MVCSchool.Controllers
 {
     public class StudentsController : Controller
     {
-        // GET: Students
-        public ActionResult Index()
+        [ActionName("all")]
+        public ActionResult GetAllStudents()
         {
             StudentVM model = new StudentVM();
             using (var cliente = new HttpClient())
@@ -32,7 +32,50 @@ namespace MVCSchool.Controllers
                 }
             }
 
-            ViewBag.Title = "MVC with WEB API";
+            ViewBag.Title = "GetAllStudents";
+
+            return View(model);
+        }
+
+        [ActionName("byId")]
+        public ActionResult GetStudentById(int id=1)
+        {
+            StudentVM model = new StudentVM();
+
+            //Id invalido
+            if (id <= 0)
+            {
+                ViewBag.Error = "El id no es válido";
+                return View();
+            }
+
+            using (var cliente = new HttpClient())
+            {
+                cliente.BaseAddress = new Uri("http://localhost:50022/api/");
+
+                //Generar el request
+                //var request = cliente.GetAsync("students/1");
+                var request = cliente.GetAsync("students/"+ id);
+                request.Wait();
+
+                //Obtener la response
+                var response = request.Result;
+
+                if (response.IsSuccessStatusCode)
+                {
+                    //Leer el dato obtenido
+                    var result = response.Content.ReadAsAsync<StudentVM>();
+                    result.Wait();
+
+                    model = result.Result;
+                }
+                else
+                {
+                    ViewBag.Error = "El estudiante con ese id no existe.";
+                }
+            }
+
+            ViewBag.Title = "GetStudentById";
 
             return View(model);
         }

@@ -169,7 +169,8 @@
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\Students\Index.cshtml" />
+    <Content Include="Views\Students\all.cshtml" />
+    <Content Include="Views\Students\byId.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

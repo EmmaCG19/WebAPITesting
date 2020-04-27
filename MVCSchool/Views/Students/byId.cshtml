@@ -1,0 +1,30 @@
+﻿@model MVCSchool.Models.StudentVM
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>GetStudentById</title>
+</head>
+<body>
+    <div>
+        @if (ViewBag.Error == null)
+        {
+            <h1 style="color: blue">
+                Id: @Model.Id
+                <br />
+                Name: @Model.FullName
+            </h1>
+        }
+        else
+        {
+            @ViewBag.Error;
+        }
+    </div>
+</body>
+</html>
